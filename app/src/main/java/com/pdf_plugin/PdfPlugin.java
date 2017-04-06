@@ -18,7 +18,6 @@ import com.morgoo.droidplugin.pm.PluginManager;
 
 import java.io.File;
 
-import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
 import static com.morgoo.helper.compat.PackageManagerCompat.INSTALL_FAILED_NOT_SUPPORT_ABI;
 import static com.morgoo.helper.compat.PackageManagerCompat.INSTALL_SUCCEEDED;
 
@@ -29,6 +28,10 @@ import static com.morgoo.helper.compat.PackageManagerCompat.INSTALL_SUCCEEDED;
  * @Date 3/31/17
  */
 public class PdfPlugin {
+    /**
+     * 插件下载路径   测试插件在项目根目录  上传到服务器
+     */
+    String url = "https://dev.chezhency.com/pdf_plug.apk";
     private Activity mContext;
     private static PdfPlugin mPdfPlug;
     private ProgressDialog mProgressDialog;
@@ -75,7 +78,6 @@ public class PdfPlugin {
     public void downLoadPlugin() {
         try {
             String fileDir = mContext.getCacheDir().getPath();
-            String url = URL.PDF_PLUG;
             String fileName = getFileName(url);
             File file = new File(fileDir, fileName);
             if (file.exists()) {
@@ -133,6 +135,7 @@ public class PdfPlugin {
 
     /**
      * 启动插件打开
+     *
      * @param apk
      */
     private void loadApk(File apk) {

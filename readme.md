@@ -1,4 +1,28 @@
 
+简单流程
+打开pdf→检查是否安装插件
+                    →未安装→下载安装插件→使用插件打开pdf
+                    →安装过→使用插件打开pdf
+
+360插件
+https://github.com/DroidPluginTeam/DroidPlugin
+
+pdf项目
+https://github.com/barteksc/AndroidPdfViewer
+打成apk插件之前把PDFViewActivity修改获取intent得到文件路径,如下,
+
+       if (getIntent() != null) {
+                String key = getIntent().getStringExtra("key");
+                if (TextUtils.isEmpty(key)) {
+                    Toast.makeText(this, "key没有", 1000).show();
+                } else {
+                    Toast.makeText(this, key, 1000).show();
+                    displayFromUri(new File(key));
+                }
+            }
+
+
+完整如下
 
 	@EActivity(R.layout.activity_main)
 	@OptionsMenu(R.menu.options)
@@ -68,23 +92,23 @@
             Toast.makeText(this, "允许后才能查看您的文档哟", 1000).show();
             return;
         }
-        if (getIntent() != null) {
-            String key = getIntent().getStringExtra("key");
-//            key = "/storage/emulated/0/aaaa.pdf";
-            if (TextUtils.isEmpty(key)) {
-                Toast.makeText(this, "key没有", 1000).show();
-            } else {
-                Toast.makeText(this, key, 1000).show();
-                displayFromUri(new File(key));
+            if (getIntent() != null) {
+                String key = getIntent().getStringExtra("key");
+    //            key = "/storage/emulated/0/aaaa.pdf";
+                if (TextUtils.isEmpty(key)) {
+                    Toast.makeText(this, "key没有", 1000).show();
+                } else {
+                    Toast.makeText(this, key, 1000).show();
+                    displayFromUri(new File(key));
+                }
             }
+    //        if (uri != null) {
+    //            displayFromUri(uri);
+    //        } else {
+    //            displayFromAsset(SAMPLE_FILE);
+    //        }
+            setTitle(pdfFileName);
         }
-//        if (uri != null) {
-//            displayFromUri(uri);
-//        } else {
-//            displayFromAsset(SAMPLE_FILE);
-//        }
-        setTitle(pdfFileName);
-    }
 
     private void displayFromAsset(String assetFileName) {
         pdfFileName = assetFileName;
