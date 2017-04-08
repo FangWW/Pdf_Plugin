@@ -31,7 +31,7 @@ public class PdfPlugin {
     /**
      * 插件下载路径   测试插件在项目根目录  上传到服务器
      */
-    String url = "https://dev.chezhency.com/pdf_plug.apk";
+    String url = "https://github.com/FangWW/Pdf_Plugin/blob/master/pdf_plug.apk?raw=true";
     private Activity mContext;
     private static PdfPlugin mPdfPlug;
     private ProgressDialog mProgressDialog;
