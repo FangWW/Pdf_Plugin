@@ -11,6 +11,8 @@
 ### 项目根目录有个123.pdf的测试文件 拷到手机根目录 如下路径
 
 	private String path = "/storage/emulated/0/123.pdf";
+	adb push /Volumes/Data/DownloadData/123.pdf /sdcard
+
 
 ### 360插件
 
