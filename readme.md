@@ -1,24 +1,24 @@
-####网上有很多使用pdfium项目做pdf功能,结果加入到自己项目中导致自己的apk大了20M左右,下面按照QQ加载插件的思路做了一个pdf插件
+#### 网上有很多使用pdfium项目做pdf功能,结果加入到自己项目中导致自己的apk大了20M左右,下面按照QQ加载插件的思路做了一个pdf插件
 
 
-###简单流程
+### 简单流程
     打开pdf→检查是否安装插件
                         →未安装→下载安装插件→使用插件打开pdf
                         →安装过→使用插件打开pdf
                         
 
 
-###项目根目录有个123.pdf的测试文件 拷到手机根目录 如下路径
+### 项目根目录有个123.pdf的测试文件 拷到手机根目录 如下路径
 
 	private String path = "/storage/emulated/0/123.pdf";
 
-###360插件
+### 360插件
 
-https://github.com/DroidPluginTeam/DroidPlugin
+[https://github.com/DroidPluginTeam/DroidPlugin](https://github.com/DroidPluginTeam/DroidPlugin)
 
-###pdf项目
+### pdf项目
 
-https://github.com/barteksc/AndroidPdfViewer
+[https://github.com/barteksc/AndroidPdfViewer](https://github.com/barteksc/AndroidPdfViewer)
 
 (直接项目打包apk)打成apk插件之前把PDFViewActivity修改获取intent得到文件路径,如下,
 
@@ -34,7 +34,7 @@ https://github.com/barteksc/AndroidPdfViewer
             
 调用插件
 
-		PackageManager pm = mContext.getPackageManager();
+	PackageManager pm = mContext.getPackageManager();
         Intent intent = pm.getLaunchIntentForPackage(item.packageInfo.packageName);
         intent.putExtra("key", mPath);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -48,6 +48,7 @@ https://github.com/barteksc/AndroidPdfViewer
 	jnipdfium(100k多)
 	然后他又添加了全平台的so库x86_64,x86,mips,arm64-v8a,armeabi,armeabi-v7a
 	导致项目20M左右!
+	![github](https://github.com/FangWW/Pdf_Plugin/blob/master/QQ20170408-112947.png?raw=true "github")
 	解决办法:
 	打包AndroidPdfViewer项目的时候
 	配置
