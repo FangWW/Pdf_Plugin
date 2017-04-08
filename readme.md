@@ -48,7 +48,9 @@
 	jnipdfium(100k多)
 	然后他又添加了全平台的so库x86_64,x86,mips,arm64-v8a,armeabi,armeabi-v7a
 	导致项目20M左右!
-	![github](https://github.com/FangWW/Pdf_Plugin/blob/master/QQ20170408-112947.png?raw=true "github")
+	
+![github](https://github.com/FangWW/Pdf_Plugin/blob/master/QQ20170408-112947.png?raw=true "github")
+
 	解决办法:
 	打包AndroidPdfViewer项目的时候
 	配置
