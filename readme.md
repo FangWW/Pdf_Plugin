@@ -5,12 +5,16 @@
     打开pdf→检查是否安装插件
                         →未安装→下载安装插件→使用插件打开pdf
                         →安装过→使用插件打开pdf
-                        
+                  
 
-
+![github](https://github.com/FangWW/Pdf_Plugin/blob/master/pdfplugin.gif?raw=true "github")		  
+		  
+		  
 ### 项目根目录有个123.pdf的测试文件 拷到手机根目录 如下路径
 
 	private String path = "/storage/emulated/0/123.pdf";
+	
+	adb command
 	adb push /Volumes/Data/DownloadData/123.pdf /sdcard
 
 
@@ -61,9 +65,10 @@
             abiFilters "armeabi"//, "armeabi-v7a", "arm64-v8a",x86_64,x86,mips
         }
 	  }
-	分别过滤只要x86,arm,mips等的6个包
+	分别过滤只要x86,arm,mips等平台的6个apk插件包 
+	将6个插件包放到服务端
 	这时下载插件的是时候只需要下载对应Android手机对应CPU的apk插件就好,就能达到QQ加载pdf插件3M左右大小的水平
-	为了方便测试,目前打的插件包是 "armeabi", "armeabi-v7a", "arm64-v8a"三个平台的10M左右
+	为了方便测试兼容大部分手机,目前打的插件包是 "armeabi", "armeabi-v7a", "arm64-v8a"三个平台的插件,此时插件大小10M左右
 	  
 	  
 
