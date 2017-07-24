@@ -8,6 +8,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.RemoteException;
 import android.support.v4.content.FileProvider;
 import android.view.KeyEvent;
 import android.view.View;
@@ -31,8 +32,9 @@ public class PdfPlugin {
     /**
      * 插件下载路径   测试插件在项目根目录  上传到服务器
      */
-    String url = "https://pro-app-qn.fir.im/0f6b6a6a8aa64aa841c865b8c224d48c75434b19.apk?attname=sample-debug.apk_2.0.1.apk&e=1500882561&token=LOvmia8oXF4xnLh0IdH05XMYpH6ENHNpARlmPc-T:wO_HH0kYnlkY_BuY9nsYRxIDeOA=";
-    //    String url = "https://raw.githubusercontent.com/FangWW/Pdf_Plugin/master/pdf_plug.apk";
+//    String url = "https://pro-app-qn.fir.im/2060312a0b27ff01b2215380b32c5e1fbc638e15.apk?attname=sample-debug.apk_2.0.1.apk&e=1500887849&token=LOvmia8oXF4xnLh0IdH05XMYpH6ENHNpARlmPc-T:LuBQXiMIBzHldyWehRW6XrZOLVg=";
+    String url = "https://raw.githubusercontent.com/FangWW/Pdf_Plugin/master/pdf_plug.apk";
+    //        String url = "https://raw.githubusercontent.com/FangWW/Pdf_Plugin/master/pdf_plug_2.0.1.apk";
     private Activity mContext;
     private static PdfPlugin mPdfPlug;
     private ProgressDialog mProgressDialog;
@@ -164,11 +166,17 @@ public class PdfPlugin {
                     new Thread() {
                         @Override
                         public void run() {
-                            if (packageInfo != null) {
-                                try {
-                                    new File(item.apkfile).delete();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+                            if (packageInfo != null) {//卸载更新
+                                if (!PluginManager.getInstance().isConnected()) {
+                                    Toast.makeText(mContext, "服务未连接", Toast.LENGTH_SHORT).show();
+                                    return;
+                                } else {
+                                    try {
+                                        PluginManager.getInstance().deletePackage(item.packageInfo.packageName, 0);
+                                    } catch (RemoteException e) {
+                                        e.printStackTrace();
+                                        openDefPdf();
+                                    }
                                 }
                             }
                             doInstall(item);
