@@ -31,8 +31,8 @@ public class PdfPlugin {
     /**
      * 插件下载路径   测试插件在项目根目录  上传到服务器
      */
-    String url = "https://pro-app-qn.fir.im/1b5c7b2ad73e19e30001cfdbc675a1827503907a.apk?attname=pdf_plug.apk_2.0.0.apk&e=1492757382&token=LOvmia8oXF4xnLh0IdH05XMYpH6ENHNpARlmPc-T:SGDnUHP9UAKvmS-xSvjCaLUPtKQ=";
-//    String url = "https://raw.githubusercontent.com/FangWW/Pdf_Plugin/master/pdf_plug.apk";
+//    String url = "https://pro-app-qn.fir.im/1b5c7b2ad73e19e30001cfdbc675a1827503907a.apk?attname=pdf_plug.apk_2.0.0.apk&e=1492757382&token=LOvmia8oXF4xnLh0IdH05XMYpH6ENHNpARlmPc-T:SGDnUHP9UAKvmS-xSvjCaLUPtKQ=";
+    String url = "https://raw.githubusercontent.com/FangWW/Pdf_Plugin/master/pdf_plug.apk";
     private Activity mContext;
     private static PdfPlugin mPdfPlug;
     private ProgressDialog mProgressDialog;

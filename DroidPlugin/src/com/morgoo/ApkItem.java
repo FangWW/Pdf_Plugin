@@ -17,7 +17,7 @@ public class ApkItem {
     public    String apkfile;
     public    PackageInfo packageInfo;
 
-   public  boolean installing = false;
+    public  boolean installing = false;
 
     public ApkItem(Context context, PackageInfo info, String path) {
         PackageManager pm = context.getPackageManager();
