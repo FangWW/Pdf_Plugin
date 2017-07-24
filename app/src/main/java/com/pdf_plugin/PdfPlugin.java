@@ -31,8 +31,8 @@ public class PdfPlugin {
     /**
      * 插件下载路径   测试插件在项目根目录  上传到服务器
      */
-//    String url = "https://pro-app-qn.fir.im/1b5c7b2ad73e19e30001cfdbc675a1827503907a.apk?attname=pdf_plug.apk_2.0.0.apk&e=1492757382&token=LOvmia8oXF4xnLh0IdH05XMYpH6ENHNpARlmPc-T:SGDnUHP9UAKvmS-xSvjCaLUPtKQ=";
-    String url = "https://raw.githubusercontent.com/FangWW/Pdf_Plugin/master/pdf_plug.apk";
+    String url = "https://pro-app-qn.fir.im/0f6b6a6a8aa64aa841c865b8c224d48c75434b19.apk?attname=sample-debug.apk_2.0.1.apk&e=1500882561&token=LOvmia8oXF4xnLh0IdH05XMYpH6ENHNpARlmPc-T:wO_HH0kYnlkY_BuY9nsYRxIDeOA=";
+    //    String url = "https://raw.githubusercontent.com/FangWW/Pdf_Plugin/master/pdf_plug.apk";
     private Activity mContext;
     private static PdfPlugin mPdfPlug;
     private ProgressDialog mProgressDialog;
@@ -154,7 +154,8 @@ public class PdfPlugin {
                     Toast.makeText(mContext, "插件服务正在初始化，请稍后再试。。。", Toast.LENGTH_SHORT).show();
                     openDefPdf();
                 }
-                if (PluginManager.getInstance().getPackageInfo(item.packageInfo.packageName, 0) != null) {
+                final PackageInfo packageInfo = PluginManager.getInstance().getPackageInfo(item.packageInfo.packageName, 0);
+                if (packageInfo != null && String.valueOf(packageInfo.versionName).equals(item.versionName)) {
                     mProgressDialog.dismiss();
                     openPdf(item);
 //                            Toast.makeText(mContext, "已经安装了，不能再安装", Toast.LENGTH_SHORT).show();
@@ -163,6 +164,13 @@ public class PdfPlugin {
                     new Thread() {
                         @Override
                         public void run() {
+                            if (packageInfo != null) {
+                                try {
+                                    new File(item.apkfile).delete();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
                             doInstall(item);
                         }
                     }.start();
