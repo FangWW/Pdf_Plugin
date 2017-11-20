@@ -1,1 +1,1 @@
-include ':app', ':DroidPlugin'
+include ':app', ':DroidPlugin', ':android-pdf-viewer', ':pdf_package'
