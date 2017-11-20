@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.RemoteException;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -36,9 +37,14 @@ public class PdfPlugin {
 
     /**
      * 更换一个url 表示更新插件包
+     * github 下载地址太慢  可放在七牛上
      */
 //    String url = "https://raw.githubusercontent.com/FangWW/Pdf_Plugin/master/pdf_plug.apk";
     String url = "https://raw.githubusercontent.com/FangWW/Pdf_Plugin/master/pdf_plug_2.0.1.apk";
+    String URL_ARM64_V8A = "https://raw.githubusercontent.com/FangWW/Pdf_Plugin/master/pdf_plug_2.0.1_arm64_v8a.apk";
+    String URL_ARMEABI = "https://raw.githubusercontent.com/FangWW/Pdf_Plugin/master/pdf_plug_2.0.1_armeabi.apk";
+    String URL_ARMEABI_V7A = "https://raw.githubusercontent.com/FangWW/Pdf_Plugin/master/pdf_plug_2.0.1_armeabi_v7a.apk";
+    String URL_X86 = "https://raw.githubusercontent.com/FangWW/Pdf_Plugin/master/pdf_plug_2.0.1_x86.apk";
     private Activity mContext;
     private static PdfPlugin mPdfPlug;
     private ProgressDialog mProgressDialog;
@@ -84,6 +90,8 @@ public class PdfPlugin {
      */
     public void downLoadPlugin() {
         try {
+            switchUrl();
+            Log.e("w", url);
             String fileDir = mContext.getCacheDir().getPath();
             String fileName = getFileName(url);
             File file = new File(fileDir, fileName);
@@ -119,6 +127,27 @@ public class PdfPlugin {
         } catch (Exception e) {
             e.printStackTrace();
             openDefPdf();
+        }
+    }
+
+    /**
+     * 选择对应插件的url
+     */
+    private void switchUrl() {
+        String abi = getAbi();
+        switch (abi) {
+            case "armeabi":
+                url = URL_ARMEABI;
+                break;
+            case "armeabi-v7a":
+                url = URL_ARMEABI_V7A;
+                break;
+            case "arm64-v8a":
+                url = URL_ARM64_V8A;
+                break;
+            case "x86":
+                url = URL_X86;
+                break;
         }
     }
 
@@ -297,6 +326,34 @@ public class PdfPlugin {
         }
         return intent;
     }
+
+
+    /**
+     * 得到cpu类型
+     *
+     * @return
+     */
+    private String getAbi() {
+        String abi;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            String[] supportedAbis = Build.SUPPORTED_ABIS;//Build.SUPPORTED_ABIS得到根据偏好排序的设备支持的ABI列表
+//            String[] supported32BitAbis = Build.SUPPORTED_32_BIT_ABIS;
+//            String[] supported64BitAbis = Build.SUPPORTED_64_BIT_ABIS;
+//            try {
+//                String cpuAbi = Build.CPU_ABI;
+//                String cpuAbi2 = Build.CPU_ABI2;
+//            } catch (Exception e) {//过时了也是可以获取到的 可以对比一下数据
+//                e.printStackTrace();
+//            }
+            abi = supportedAbis[0];
+        } else {
+            String cpuAbi = Build.CPU_ABI;
+//            String cpuAbi2 = Build.CPU_ABI2;
+            abi = cpuAbi;
+        }
+        return abi;
+    }
+
 
     /**
      * 打开pdf文件
